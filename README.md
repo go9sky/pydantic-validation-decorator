@@ -129,6 +129,13 @@ if __name__ == '__main__':
 | `validate_model_index` | int, optional | 需要在函数中验证的`Pydantic`模型的索引（从位置参数中获取） | - |
 | `validate_function` | str, optional | 在`Pydantic`模型中定义的验证函数的名称 | 'validate_fields' |
 
+### `@Alpha`    字段字母验证装饰器
+| 参数名称 | 类型 | 参数说明 | 默认值 |
+| - | - | - | - |
+| `field_name` | str | 需要验证的字段名称 | - |
+| `mode` | Literal['upper', 'lower', 'mixed'], optional | 验证模式。可选项：'upper'（仅大写字母）、'lower'（仅小写字母）、'mixed'（大小写混合） | 'mixed' |
+| `message` | str, optional | 验证失败提示消息 | `'{field_name} must contain only letters.'` OR `'{field_name} must contain only uppercase letters.'` OR `'{field_name} must contain only lowercase letters.'` |
+
 ### `@Network`    字段网络类型验证装饰器 
 | 参数名称 | 类型 | 参数说明 | 默认值 |
 | - | - | - | - |
@@ -140,6 +147,7 @@ if __name__ == '__main__':
 | 参数名称 | 类型 | 参数说明 | 默认值 |
 | - | - | - | - |
 | `field_name` | str | 需要验证的字段名称 | - |
+| `allow_unset` | bool, optional | 如果为True，仅当可选字段被显式提供时才运行验证 | False |
 | `message` | str, optional | 验证失败提示消息 | `'{field_name} cannot be empty.'` |
 
 ### `@Pattern`    字段正则验证装饰器
@@ -174,5 +182,5 @@ if __name__ == '__main__':
 git clone https://github.com/insistence/pydantic-validation-decorator.git
 cd pydantic-validation-decorator
 # 安装开发环境所需依赖
-pip install -r requirements.txt
+pip install -r requirements-dev.txt
 ```

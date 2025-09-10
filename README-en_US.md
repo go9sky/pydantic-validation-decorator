@@ -129,6 +129,13 @@ if __name__ == '__main__':
 | `validate_model_index` | int, optional | The index of the `Pydantic` model that needs to be validated in the function.(obtained from positional parameters) | - |
 | `validate_function` | str, optional | The name of the validation function defined in the `Pydantic` model. | 'validate_fields' |
 
+### `@Alpha`    Field Alpha Validation Decorator
+| Parameter | Type | Parameter Description | Default Value |
+| - | - | - | - |
+| `field_name` | str | Field name that need to be validate. | - |
+| `mode` | Literal['upper', 'lower', 'mixed'], optional | Validation mode. Options: 'upper' (only uppercase), 'lower' (only lowercase), 'mixed' (both upper and lower). | 'mixed' |
+| `message` | str, optional | Prompt message for validation failure. Defaults to None. | `'{field_name} must contain only letters.'` OR `'{field_name} must contain only uppercase letters.'` OR `'{field_name} must contain only lowercase letters.'` |
+
 ### `@Network`    Field Network Type Validation Decorator 
 | Parameter | Type | Parameter Description | Default Value |
 | - | - | - | - |
@@ -140,6 +147,7 @@ if __name__ == '__main__':
 | Parameter | Type | Parameter Description | Default Value |
 | - | - | - | - |
 | `field_name` | str | Field name that need to be validate. | - |
+| `allow_unset` | bool, optional | If True, validation only runs when the optional field is explicitly provided. | False |
 | `message` | str, optional | Prompt message for validation failure. Defaults to None. | `'{field_name} cannot be empty.'` |
 
 ### `@Pattern`    Field Pattern Validation Decorator
@@ -174,5 +182,5 @@ if __name__ == '__main__':
 git clone https://github.com/insistence/pydantic-validation-decorator.git
 cd pydantic-validation-decorator
 # Install dependencies required for development environment
-pip install -r requirements.txt
+pip install -r requirements-dev.txt
 ```
