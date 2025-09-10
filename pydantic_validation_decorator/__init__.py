@@ -1,4 +1,5 @@
 from .validation import ValidateFields
+from .alpha import Alpha
 from .network import Network
 from .not_blank import NotBlank
 from .pattern import Pattern
@@ -9,6 +10,7 @@ from .exceptions import FieldValidationError
 
 __all__ = [
     'ValidateFields',
+    'Alpha',
     'Network',
     'NotBlank',
     'Pattern',
