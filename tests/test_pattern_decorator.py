@@ -29,9 +29,7 @@ def sync_test_pattern_decorator(pattern_test: PatternTestModel):
 
 
 @ValidateFields(mode='args', validate_model_index=0)
-async def async_test_pattern_decorator(
-    pattern_test: PatternTestModel,
-):
+async def async_test_pattern_decorator(pattern_test: PatternTestModel):
     return pattern_test.model_dump()
 
 

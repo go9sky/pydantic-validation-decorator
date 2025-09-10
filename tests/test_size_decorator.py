@@ -40,9 +40,7 @@ def sync_test_size_decorator(size_test: SizeTestModel):
 
 
 @ValidateFields(mode='args', validate_model_index=0)
-async def async_test_size_decorator(
-    size_test: SizeTestModel,
-):
+async def async_test_size_decorator(size_test: SizeTestModel):
     return size_test.model_dump()
 
 

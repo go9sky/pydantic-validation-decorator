@@ -29,10 +29,7 @@ def sync_test_network_decorator(network_test: NetworkTestModel):
 
 
 @ValidateFields(mode='args', validate_model_index=1)
-async def async_test_network_decorator(
-    test,
-    network_test,
-):
+async def async_test_network_decorator(test, network_test):
     return network_test.model_dump()
 
 

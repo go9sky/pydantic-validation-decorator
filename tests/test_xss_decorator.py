@@ -28,9 +28,7 @@ def sync_test_xss_decorator(xss_test: XssTestModel):
 
 
 @ValidateFields(mode='args', validate_model_index=0)
-async def async_test_xss_decorator(
-    xss_test: XssTestModel,
-):
+async def async_test_xss_decorator(xss_test: XssTestModel):
     return xss_test.model_dump()
 
 
