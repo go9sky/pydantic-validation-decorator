@@ -14,6 +14,7 @@ class FieldValidationError(Exception):
         field_value: Any = None,
         validator: str = None,
         message: str = None,
+        message_args: dict = None,
     ):
         """Custom Field Validation Exception FieldValidationError
 
@@ -23,12 +24,14 @@ class FieldValidationError(Exception):
             field_value (Any, optional): Field value with errors. Defaults to None.
             validator (str, optional): Validation decorator with errors. Defaults to None.
             message (str, optional): Prompt message for validation failure. Defaults to None.
+            message_args (dict, optional): Arguments for message formatting. Defaults to ``{}``.
         """
         self.model_name = model_name
         self.field_name = field_name
         self.field_value = field_value
         self.validator = validator
         self.message = message
+        self.message_args = message_args or {}
 
 
 class FunctionTypeError(Exception):
