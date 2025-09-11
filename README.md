@@ -149,7 +149,7 @@ if __name__ == '__main__':
 | 参数名称 | 类型 | 参数说明 | 默认值 |
 | - | - | - | - |
 | `field_name` | str | 需要验证的字段名称 | - |
-| `allow_unset` | bool, optional | 如果为True，仅当可选字段被显式提供时才运行验证 | False |
+| `allow_unset` | bool | 如果为True，仅当可选字段被显式提供时才运行验证 | False |
 | `message` | str, optional | 验证失败提示消息 | `'{field_name} cannot be empty.'` |
 | `message_args` | dict, optional | 消息格式化参数 | `{}` |
 

@@ -149,7 +149,7 @@ if __name__ == '__main__':
 | Parameter | Type | Parameter Description | Default Value |
 | - | - | - | - |
 | `field_name` | str | Field name that need to be validate. | - |
-| `allow_unset` | bool, optional | If True, validation only runs when the optional field is explicitly provided. | False |
+| `allow_unset` | bool | If True, validation only runs when the optional field is explicitly provided. | False |
 | `message` | str, optional | Prompt message for validation failure. Defaults to None. | `'{field_name} cannot be empty.'` |
 | `message_args` | dict, optional | Arguments for message formatting. Defaults to None. | `{}` |
 

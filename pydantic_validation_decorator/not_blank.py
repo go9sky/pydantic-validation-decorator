@@ -14,7 +14,7 @@ class NotBlank:
     def __init__(
         self,
         field_name: str,
-        allow_unset: Optional[bool] = False,
+        allow_unset: bool = False,
         message: Optional[str] = None,
         message_args: Optional[dict] = None,
     ):
@@ -22,7 +22,7 @@ class NotBlank:
 
         Args:
             field_name (str): Field name that need to be validated.
-            allow_unset (Optional[bool], optional): If True, validation only runs when the optional field is explicitly provided. Defaults to False.
+            allow_unset (bool): If True, validation only runs when the optional field is explicitly provided. Defaults to False.
             message (Optional[str], optional): Prompt message for validation failure. Defaults to None.
             message_args (Optional[dict], optional): Arguments for message formatting. Defaults to None.
         """
