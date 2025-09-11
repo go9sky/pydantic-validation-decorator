@@ -20,6 +20,7 @@ class Size:
         min_length: Optional[int] = 0,
         max_length: Optional[int] = None,
         message: Optional[str] = None,
+        message_args: Optional[dict] = None,
     ):
         """Field Size Validation Decorator
 
@@ -32,6 +33,7 @@ class Size:
             min_length (Optional[int], optional): The length of a string field cannot be less than min_length. Defaults to 0.
             max_length (Optional[int], optional): The length of a string field cannot be greater than max_length. Defaults to None.
             message (Optional[str], optional): Prompt message for validation failure. Defaults to None.
+            message_args (Optional[dict], optional): Arguments for message formatting. Defaults to None.
         """
         self.field_name = field_name
         self.gt = gt
@@ -41,6 +43,7 @@ class Size:
         self.min_length = min_length if min_length >= 0 else 0
         self.max_length = max_length
         self.message = message
+        self.message_args = message_args or {}
 
     def __call__(self, func):
         is_async = iscoroutinefunction(func)
@@ -61,6 +64,7 @@ class Size:
                                 message=self.message
                                 if self.message
                                 else f'{self.field_name} must be greater than {self.gt}.',
+                                message_args=self.message_args,
                             )
                         elif self.ge is not None and field_value < self.ge:
                             raise FieldValidationError(
@@ -71,6 +75,7 @@ class Size:
                                 message=self.message
                                 if self.message
                                 else f'{self.field_name} must be greater than or equal to {self.ge}.',
+                                message_args=self.message_args,
                             )
                         elif self.lt is not None and field_value >= self.lt:
                             raise FieldValidationError(
@@ -81,6 +86,7 @@ class Size:
                                 message=self.message
                                 if self.message
                                 else f'{self.field_name} must be less than {self.lt}.',
+                                message_args=self.message_args,
                             )
                         elif self.le is not None and field_value > self.le:
                             raise FieldValidationError(
@@ -91,6 +97,7 @@ class Size:
                                 message=self.message
                                 if self.message
                                 else f'{self.field_name} must be less than or equal to {self.le}.',
+                                message_args=self.message_args,
                             )
                     elif isinstance(field_value, str):
                         if len(field_value) < self.min_length:
@@ -102,6 +109,7 @@ class Size:
                                 message=self.message
                                 if self.message
                                 else f'The length of {self.field_name} cannot be less than {self.min_length}.',
+                                message_args=self.message_args,
                             )
                         elif self.max_length is not None and len(field_value) > self.max_length:
                             raise FieldValidationError(
@@ -112,6 +120,7 @@ class Size:
                                 message=self.message
                                 if self.message
                                 else f'The length of {self.field_name} cannot be greater than {self.max_length}.',
+                                message_args=self.message_args,
                             )
                 return await func(*args, **kwargs)
 
@@ -134,6 +143,7 @@ class Size:
                                 message=self.message
                                 if self.message
                                 else f'{self.field_name} must be greater than {self.gt}.',
+                                message_args=self.message_args,
                             )
                         elif self.ge is not None and field_value < self.ge:
                             raise FieldValidationError(
@@ -144,6 +154,7 @@ class Size:
                                 message=self.message
                                 if self.message
                                 else f'{self.field_name} must be greater than or equal to {self.ge}.',
+                                message_args=self.message_args,
                             )
                         elif self.lt is not None and field_value >= self.lt:
                             raise FieldValidationError(
@@ -154,6 +165,7 @@ class Size:
                                 message=self.message
                                 if self.message
                                 else f'{self.field_name} must be less than {self.lt}.',
+                                message_args=self.message_args,
                             )
                         elif self.le is not None and field_value > self.le:
                             raise FieldValidationError(
@@ -164,6 +176,7 @@ class Size:
                                 message=self.message
                                 if self.message
                                 else f'{self.field_name} must be less than or equal to {self.le}.',
+                                message_args=self.message_args,
                             )
                     elif isinstance(field_value, str):
                         if len(field_value) < self.min_length:
@@ -175,6 +188,7 @@ class Size:
                                 message=self.message
                                 if self.message
                                 else f'The length of {self.field_name} cannot be less than {self.min_length}.',
+                                message_args=self.message_args,
                             )
                         elif self.max_length is not None and len(field_value) > self.max_length:
                             raise FieldValidationError(
@@ -185,6 +199,7 @@ class Size:
                                 message=self.message
                                 if self.message
                                 else f'The length of {self.field_name} cannot be greater than {self.max_length}.',
+                                message_args=self.message_args,
                             )
                 return func(*args, **kwargs)
 

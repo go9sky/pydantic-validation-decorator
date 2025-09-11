@@ -15,6 +15,7 @@ class Alpha:
         field_name: str,
         mode: Literal['upper', 'lower', 'mixed'] = 'mixed',
         message: Optional[str] = None,
+        message_args: Optional[dict] = None,
     ):
         """Field Alpha Validation Decorator
 
@@ -22,10 +23,12 @@ class Alpha:
             field_name (str): Field name that need to be validate.
             mode (Literal["upper", "lower", "mixed"]): Validation mode. Options: 'upper' (only uppercase), 'lower' (only lowercase), 'mixed' (both upper and lower). Defaults to 'mixed'.
             message (Optional[str], optional): Prompt message for validation failure. Defaults to None.
+            message_args (Optional[dict], optional): Arguments for message formatting. Defaults to None.
         """
         self.field_name = field_name
         self.mode = mode
         self.message = message
+        self.message_args = message_args or {}
 
     def _validate_alpha(self, value: str) -> bool:
         """
@@ -80,6 +83,7 @@ class Alpha:
                             field_value=field_value,
                             validator=self.__class__.__name__,
                             message=self.message if self.message else self._get_default_message(),
+                            message_args=self.message_args,
                         )
                 return await func(*args, **kwargs)
 
@@ -99,6 +103,7 @@ class Alpha:
                             field_value=field_value,
                             validator=self.__class__.__name__,
                             message=self.message if self.message else self._get_default_message(),
+                            message_args=self.message_args,
                         )
                 return func(*args, **kwargs)
 

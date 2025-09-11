@@ -16,6 +16,7 @@ class Pattern:
         field_name: str,
         regexp: str,
         message: Optional[str] = None,
+        message_args: Optional[dict] = None,
     ):
         """Field Pattern Validation Decorator
 
@@ -23,10 +24,12 @@ class Pattern:
             field_name (str): Field name that need to be validate.
             regexp (str): Regular expression.
             message (Optional[str], optional): Prompt message for validation failure. Defaults to None.
+            message_args (Optional[dict], optional): Arguments for message formatting. Defaults to None.
         """
         self.field_name = field_name
         self.regexp = regexp
         self.message = message
+        self.message_args = message_args or {}
 
     def __call__(self, func):
         is_async = iscoroutinefunction(func)
@@ -44,6 +47,7 @@ class Pattern:
                             field_value=field_value,
                             validator=self.__class__.__name__,
                             message=self.message if self.message else f'The format of {self.field_name} is incorrect.',
+                            message_args=self.message_args,
                         )
                 return await func(*args, **kwargs)
 
@@ -63,6 +67,7 @@ class Pattern:
                             field_value=field_value,
                             validator=self.__class__.__name__,
                             message=self.message if self.message else f'The format of {self.field_name} is incorrect.',
+                            message_args=self.message_args,
                         )
                 return func(*args, **kwargs)
 

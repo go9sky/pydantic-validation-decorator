@@ -18,15 +18,18 @@ class Xss:
         self,
         field_name: str,
         message: Optional[str] = None,
+        message_args: Optional[dict] = None,
     ):
         """Field Xss Validation Decorator
 
         Args:
             field_name (str): Field name that need to be validate.
             message (Optional[str], optional): Prompt message for validation failure. Defaults to None.
+            message_args (Optional[dict], optional): Arguments for message formatting. Defaults to None.
         """
         self.field_name = field_name
         self.message = message
+        self.message_args = message_args or {}
 
     def __call__(self, func):
         is_async = iscoroutinefunction(func)
@@ -48,6 +51,7 @@ class Xss:
                                 message=self.message
                                 if self.message
                                 else f'{self.field_name} cannot contain script characters.',
+                                message_args=self.message_args,
                             )
                 return await func(*args, **kwargs)
 
@@ -71,6 +75,7 @@ class Xss:
                                 message=self.message
                                 if self.message
                                 else f'{self.field_name} cannot contain script characters.',
+                                message_args=self.message_args,
                             )
                 return func(*args, **kwargs)
 

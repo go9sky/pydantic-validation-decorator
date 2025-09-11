@@ -113,6 +113,7 @@ class Network:
             'IPvAnyAddress',
         ],
         message: Optional[str] = None,
+        message_args: Optional[dict] = None,
     ):
         """Field Network Type Validation Decorator
 
@@ -120,10 +121,12 @@ class Network:
             field_name (str): Field name that need to be validate.
             field_type (Literal[ &#39;AnyUrl&#39;, &#39;AnyHttpUrl&#39;, &#39;HttpUrl&#39;, &#39;AnyWebsocketUrl&#39;, &#39;WebsocketUrl&#39;, &#39;FileUrl&#39;, &#39;FtpUrl&#39;, &#39;PostgresDsn&#39;, &#39;CockroachDsn&#39;, &#39;AmqpDsn&#39;, &#39;RedisDsn&#39;, &#39;MongoDsn&#39;, &#39;KafkaDsn&#39;, &#39;NatsDsn&#39;, &#39;MySQLDsn&#39;, &#39;MariaDBDsn&#39;, &#39;ClickHouseDsn&#39;, &#39;EmailStr&#39;, &#39;NameEmail&#39;, &#39;IPvAnyAddress&#39;, ]): Field type that need to be validate.
             message (Optional[str], optional): Prompt message for validation failure. Defaults to None.
+            message_args (Optional[dict], optional): Arguments for message formatting. Defaults to None.
         """
         self.field_name = field_name
         self.field_type = field_type
         self.message = message
+        self.message_args = message_args or {}
 
     def __call__(self, func):
         is_async = iscoroutinefunction(func)
@@ -188,6 +191,7 @@ class Network:
                                 message=self.message
                                 if self.message
                                 else f'{self.field_name} is not the correct {self.field_type} type.',
+                                message_args=self.message_args,
                             )
                 return await func(*args, **kwargs)
 
@@ -254,6 +258,7 @@ class Network:
                                 message=self.message
                                 if self.message
                                 else f'{self.field_name} is not the correct {self.field_type} type.',
+                                message_args=self.message_args,
                             )
                 return func(*args, **kwargs)
 

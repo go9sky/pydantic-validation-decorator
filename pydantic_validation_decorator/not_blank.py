@@ -16,6 +16,7 @@ class NotBlank:
         field_name: str,
         allow_unset: Optional[bool] = False,
         message: Optional[str] = None,
+        message_args: Optional[dict] = None,
     ):
         """Field NotBlank Validation Decorator
 
@@ -23,10 +24,12 @@ class NotBlank:
             field_name (str): Field name that need to be validated.
             allow_unset (Optional[bool], optional): If True, validation only runs when the optional field is explicitly provided. Defaults to False.
             message (Optional[str], optional): Prompt message for validation failure. Defaults to None.
+            message_args (Optional[dict], optional): Arguments for message formatting. Defaults to None.
         """
         self.field_name = field_name
         self.allow_unset = allow_unset
         self.message = message
+        self.message_args = message_args or {}
 
     def __call__(self, func):
         is_async = iscoroutinefunction(func)
@@ -54,6 +57,7 @@ class NotBlank:
                                 field_value=field_value,
                                 validator=self.__class__.__name__,
                                 message=self.message if self.message else f'{self.field_name} cannot be empty.',
+                                message_args=self.message_args,
                             )
                 return await func(*args, **kwargs)
 
@@ -82,6 +86,7 @@ class NotBlank:
                                 field_value=field_value,
                                 validator=self.__class__.__name__,
                                 message=self.message if self.message else f'{self.field_name} cannot be empty.',
+                                message_args=self.message_args,
                             )
                 return func(*args, **kwargs)
 
