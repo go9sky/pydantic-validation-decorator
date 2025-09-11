@@ -135,6 +135,7 @@ if __name__ == '__main__':
 | `field_name` | str | 需要验证的字段名称 | - |
 | `mode` | Literal['upper', 'lower', 'mixed'], optional | 验证模式。可选项：'upper'（仅大写字母）、'lower'（仅小写字母）、'mixed'（大小写混合） | 'mixed' |
 | `message` | str, optional | 验证失败提示消息 | `'{field_name} must contain only letters.'` OR `'{field_name} must contain only uppercase letters.'` OR `'{field_name} must contain only lowercase letters.'` |
+| `message_args` | dict, optional | 消息格式化参数 | `{}` |
 
 ### `@Network`    字段网络类型验证装饰器 
 | 参数名称 | 类型 | 参数说明 | 默认值 |
@@ -142,6 +143,7 @@ if __name__ == '__main__':
 | `field_name` | str | 需要验证的字段名称 | - |
 | `field_type` | str | 需要验证的字段类型，可选的有'AnyUrl', 'AnyHttpUrl', 'HttpUrl', 'AnyWebsocketUrl', 'WebsocketUrl', 'FileUrl', 'FtpUrl', 'PostgresDsn', 'CockroachDsn', 'AmqpDsn', 'RedisDsn', 'MongoDsn', 'KafkaDsn', 'NatsDsn', 'MySQLDsn', 'MariaDBDsn', 'ClickHouseDsn', 'EmailStr', 'NameEmail', 'IPvAnyAddress', | - |
 | `message` | str, optional | 验证失败提示消息 | `'{field_name} is not the correct {field_type} type.'` |
+| `message_args` | dict, optional | 消息格式化参数 | `{}` |
 
 ### `@NotBlank`   字段非空验证装饰器
 | 参数名称 | 类型 | 参数说明 | 默认值 |
@@ -149,6 +151,7 @@ if __name__ == '__main__':
 | `field_name` | str | 需要验证的字段名称 | - |
 | `allow_unset` | bool, optional | 如果为True，仅当可选字段被显式提供时才运行验证 | False |
 | `message` | str, optional | 验证失败提示消息 | `'{field_name} cannot be empty.'` |
+| `message_args` | dict, optional | 消息格式化参数 | `{}` |
 
 ### `@Pattern`    字段正则验证装饰器
 | 参数名称 | 类型 | 参数说明 | 默认值 |
@@ -156,6 +159,7 @@ if __name__ == '__main__':
 | `field_name` | str | 需要验证的字段名称 | - |
 | `regexp` | str | 正则表达式 | - |
 | `message` | str, optional | 验证失败提示消息 | `'The format of {field_name} is incorrect.'` |
+| `message_args` | dict, optional | 消息格式化参数 | `{}` |
 
 ### `@Size`   字段大小验证装饰器
 | 参数名称 | 类型 | 参数说明 | 默认值 |
@@ -168,12 +172,14 @@ if __name__ == '__main__':
 | `min_length` | int, optional | 字符串型字段长度不能小于min_length | 0 |
 | `max_length` | int, optional | 字符串型字段长度不能大于max_length | - |
 | `message` | str, optional | 验证失败提示消息 | `'{field_name} must be greater than {gt}.'` OR `'{field_name} must be greater than or equal to {ge}.'` OR `'{field_name} must be less than {lt}.'` OR `'{field_name} must be less than or equal to {le}.'` OR `'The length of {field_name} cannot be less than {min_length}.'` OR `'The length of {field_name} cannot be greater than {max_length}.'` |
+| `message_args` | dict, optional | 消息格式化参数 | `{}` |
 
 ### `@Xss`    字段Xss验证装饰器
 | 参数名称 | 类型 | 参数说明 | 默认值 |
 | - | - | - | - |
 | `field_name` | str | 需要验证的字段名称 | - |
 | `message` | str, optional | 验证失败提示消息 | `'{field_name} cannot contain script characters.'` |
+| `message_args` | dict, optional | 消息格式化参数 | `{}` |
 
 <a name="contribute" ></a>
 

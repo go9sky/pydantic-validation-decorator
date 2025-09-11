@@ -24,7 +24,7 @@ class FieldValidationError(Exception):
             field_value (Any, optional): Field value with errors. Defaults to None.
             validator (str, optional): Validation decorator with errors. Defaults to None.
             message (str, optional): Prompt message for validation failure. Defaults to None.
-            message_args (dict, optional): Arguments for message formatting. Defaults to ``{}``.
+            message_args (dict, optional): Arguments for message formatting. Defaults to None.
         """
         self.model_name = model_name
         self.field_name = field_name
